@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="api.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2><i class="fa-solid fa-location-dot location"></i><span id="location"></span></h2>
+            <h6 id="weather"></h6>
+            <img src="" id="icon">
+            <h4><span id="temp"></span><sup>o</sup>C</h4>
+            <button onclick="window.location.reload()" class="refresh"><i class="fa-solid fa-arrows-rotate"></i></button>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/7bb9a5401e.js" crossorigin="anonymous"></script>
+<script>
+    link="https://api.openweathermap.org/data/2.5/weather?q=mumbai&lon={lon}&appid=fde6f01704e5919e4dfa576d23c47107"
+    let request = new XMLHttpRequest();
+    request.open("GET",link,true);
+    request.onload = function(){
+        let obj = JSON.parse(this.response);
+        document.getElementById("weather").innerHTML = obj.weather[0].description;
+        document.getElementById("location").innerHTML = obj.name;
+        document.getElementById("icon").src = "https://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
+        document.getElementById("temp").innerHTML = Math.round (obj.main.temp - 273.15);
+        }
+    if(request.status >= 200 && request.status < 400){
+        let temp = obj.main.temp;
+    }
+    else{
+        "the city data is not available"
+    }
+    request.send();
+</script>
+</html>
